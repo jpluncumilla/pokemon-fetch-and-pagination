@@ -14,17 +14,22 @@ const PokemonList = () => {
 
   const fetchPokemon = async () => {
     // offset param for pagination example = ?limit=60&offset=60
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?limit=${itemsPerPage}`
-    );
-    const data = await response.json();
+    const offset = (currentPage - 1) * itemsPerPage;
     try {
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon?limit=${itemsPerPage}&offset=${offset}`
+      );
+      const data = await response.json();
       console.log(data.results);
       setPokemon(data.results);
       setPages(Math.ceil(151 / itemsPerPage));
     } catch (err) {
       console.log("Error fetching Pokémon:", err);
     }
+  };
+
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
   };
 
   return (
@@ -35,6 +40,7 @@ const PokemonList = () => {
       <Pagination
         count={pages}
         page={currentPage}
+        onChange={handleChange}
         variant='outlined'
         shape='rounded'
         color='secondary'
