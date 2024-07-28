@@ -6,17 +6,17 @@ const PokemonList = () => {
   const [pokemon, setPokemon] = useState([]);
   const [pages, setPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
-  //   function fetchPokemon() {
-  //     // offset param for pagination example = ?limit=60&offset=60
-  //     fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
-  //       .then((response) => response.json())
-  //       .then((poke) => console.log(poke))
-  //       .catch((error) => console.error("Error fetching Pokémon:", error));
-  //   }
+  useEffect(() => {
+    fetchPokemon();
+  }, [currentPage]);
 
   const fetchPokemon = async () => {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
+    // offset param for pagination example = ?limit=60&offset=60
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon?limit=${itemsPerPage}`
+    );
     const data = await response.json();
     try {
       console.log(data.results);
@@ -25,10 +25,6 @@ const PokemonList = () => {
       console.log("Error fetching Pokémon:", err);
     }
   };
-
-  useEffect(() => {
-    fetchPokemon();
-  }, [currentPage]);
 
   return (
     <div>
