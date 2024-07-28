@@ -21,6 +21,7 @@ const PokemonList = () => {
     try {
       console.log(data.results);
       setPokemon(data.results);
+      setPages(Math.ceil(151 / itemsPerPage));
     } catch (err) {
       console.log("Error fetching Pokémon:", err);
     }
@@ -36,6 +37,7 @@ const PokemonList = () => {
         page={currentPage}
         variant='outlined'
         shape='rounded'
+        color='secondary'
       />
     </div>
   );
