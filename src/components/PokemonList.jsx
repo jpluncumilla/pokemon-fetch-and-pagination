@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Pagination } from "@mui/material";
 
 const PokemonList = () => {
   function fetchPokemon() {
@@ -12,6 +13,10 @@ const PokemonList = () => {
     fetchPokemon();
   }, []);
 
-  return <div>Pokemon List</div>;
+  return (
+    <div>
+      <Pagination count={300} variant='outlined' shape='rounded' />
+    </div>
+  );
 };
 export default PokemonList;
