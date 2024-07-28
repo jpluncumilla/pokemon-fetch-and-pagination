@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Pagination } from "@mui/material";
+import {
+  Pagination,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+  Typography,
+} from "@mui/material";
 
 const PokemonList = () => {
   //Pass fetched pokemons to array
   const [pokemon, setPokemon] = useState([]);
   const [pages, setPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [pokemonDetails, setPokemonDetails] = useState([]);
   const itemsPerPage = 10;
 
   useEffect(() => {
@@ -23,6 +32,14 @@ const PokemonList = () => {
       console.log(data.results);
       setPokemon(data.results);
       setPages(Math.ceil(151 / itemsPerPage));
+
+      //Pokemon Details (Nested data)
+      const detailsFetch = data.results.map((pokemon) =>
+        fetch(pokemon.url).then((res) => res.json())
+      );
+      const details = await Promise.all(detailsFetch);
+      setPokemonDetails(detailsFetch);
+      console.log(details);
     } catch (err) {
       console.log("Error fetching Pokémon:", err);
     }
@@ -34,8 +51,29 @@ const PokemonList = () => {
 
   return (
     <div>
-      {pokemon.map((e) => (
-        <h1>{e.name}</h1>
+      {pokemon.map((e, i) => (
+        <div key={i + 1}>
+          <Card sx={{ maxWidth: 345 }}>
+            <CardMedia
+              sx={{ height: 140 }}
+              image='/static/images/cards/contemplative-reptile.jpg'
+              title='green iguana'
+            />
+            <CardContent>
+              <Typography gutterBottom variant='h5' component='div'>
+                Lizard
+              </Typography>
+              <Typography variant='body2' color='text.secondary'>
+                Lizards are a widespread group of squamate reptiles, with over
+                6,000 species, ranging across all continents except Antarctica
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size='small'>Share</Button>
+              <Button size='small'>Learn More</Button>
+            </CardActions>
+          </Card>
+        </div>
       ))}
       <Pagination
         count={pages}
