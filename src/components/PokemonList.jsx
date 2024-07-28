@@ -20,6 +20,7 @@ const PokemonList = () => {
     const data = await response.json();
     try {
       console.log(data.results);
+      setPokemon(data.results);
     } catch (err) {
       console.log("Error fetching Pokémon:", err);
     }
@@ -31,6 +32,9 @@ const PokemonList = () => {
 
   return (
     <div>
+      {pokemon.map((e) => (
+        <h1>{e.name}</h1>
+      ))}
       <Pagination
         count={pages}
         page={currentPage}
