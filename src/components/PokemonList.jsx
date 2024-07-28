@@ -38,7 +38,7 @@ const PokemonList = () => {
         fetch(pokemon.url).then((res) => res.json())
       );
       const details = await Promise.all(detailsFetch);
-      setPokemonDetails(detailsFetch);
+      setPokemonDetails(details);
       console.log(details);
     } catch (err) {
       console.log("Error fetching Pokémon:", err);
@@ -51,17 +51,18 @@ const PokemonList = () => {
 
   return (
     <div>
-      {pokemon.map((e, i) => (
+      {pokemonDetails.map((e, i) => (
         <div key={i + 1}>
           <Card sx={{ maxWidth: 345 }}>
             <CardMedia
-              sx={{ height: 140 }}
-              image='/static/images/cards/contemplative-reptile.jpg'
-              title='green iguana'
+              sx={{ height: 190 }}
+              component='img'
+              image={e.sprites?.front_shiny}
+              title={e.name}
             />
             <CardContent>
               <Typography gutterBottom variant='h5' component='div'>
-                Lizard
+                {e?.name}
               </Typography>
               <Typography variant='body2' color='text.secondary'>
                 Lizards are a widespread group of squamate reptiles, with over
