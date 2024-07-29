@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import {
   Pagination,
   Card,
-  CardActions,
   CardContent,
   CardMedia,
-  Button,
   Typography,
 } from "@mui/material";
 
@@ -50,14 +48,15 @@ const PokemonList = () => {
 
   return (
     <div>
+      <h1>MetaPhase API Fetching/Pagination Assessment</h1>
       <div className='cards'>
         {pokemonDetails.map((e, i) => (
           <div key={i + 1}>
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ width: 200 }}>
               <CardMedia
                 sx={{ height: 190 }}
                 component='img'
-                image={e.sprites?.front_shiny}
+                image={e.sprites?.front_default}
                 title={e.name}
               />
               <CardContent>
