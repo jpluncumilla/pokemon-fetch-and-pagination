@@ -11,7 +11,7 @@ import {
 
 const PokemonList = () => {
   //Pass fetched pokemons to array
-  const [pokemon, setPokemon] = useState([]);
+  const [_pokemon, setPokemon] = useState([]);
   const [pages, setPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemonDetails, setPokemonDetails] = useState([]);
@@ -29,7 +29,6 @@ const PokemonList = () => {
         `https://pokeapi.co/api/v2/pokemon?limit=${itemsPerPage}&offset=${offset}`
       );
       const data = await response.json();
-      console.log(data.results);
       setPokemon(data.results);
       setPages(Math.ceil(151 / itemsPerPage));
 
@@ -66,14 +65,18 @@ const PokemonList = () => {
                   {e?.name}
                 </Typography>
                 <Typography variant='body2' color='text.secondary'>
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
+                  Base Exp: {e.base_experience}
+                </Typography>
+                <Typography variant='body2' color='text.secondary'>
+                  Height: {e.height}
+                </Typography>{" "}
+                <Typography variant='body2' color='text.secondary'>
+                  Weight: {e.weight}
+                </Typography>
+                <Typography variant='body2' color='text.secondary'>
+                  Pokemon Type: {e.types[0].type.name}
                 </Typography>
               </CardContent>
-              <CardActions>
-                <Button size='small'>Share</Button>
-                <Button size='small'>Learn More</Button>
-              </CardActions>
             </Card>
           </div>
         ))}
