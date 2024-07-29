@@ -51,39 +51,44 @@ const PokemonList = () => {
 
   return (
     <div>
-      {pokemonDetails.map((e, i) => (
-        <div key={i + 1}>
-          <Card sx={{ maxWidth: 345 }}>
-            <CardMedia
-              sx={{ height: 190 }}
-              component='img'
-              image={e.sprites?.front_shiny}
-              title={e.name}
-            />
-            <CardContent>
-              <Typography gutterBottom variant='h5' component='div'>
-                {e?.name}
-              </Typography>
-              <Typography variant='body2' color='text.secondary'>
-                Lizards are a widespread group of squamate reptiles, with over
-                6,000 species, ranging across all continents except Antarctica
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size='small'>Share</Button>
-              <Button size='small'>Learn More</Button>
-            </CardActions>
-          </Card>
-        </div>
-      ))}
-      <Pagination
-        count={pages}
-        page={currentPage}
-        onChange={handleChange}
-        variant='outlined'
-        shape='rounded'
-        color='secondary'
-      />
+      <div className='cards'>
+        {pokemonDetails.map((e, i) => (
+          <div key={i + 1}>
+            <Card sx={{ maxWidth: 345 }}>
+              <CardMedia
+                sx={{ height: 190 }}
+                component='img'
+                image={e.sprites?.front_shiny}
+                title={e.name}
+              />
+              <CardContent>
+                <Typography gutterBottom variant='h5' component='div'>
+                  {e?.name}
+                </Typography>
+                <Typography variant='body2' color='text.secondary'>
+                  Lizards are a widespread group of squamate reptiles, with over
+                  6,000 species, ranging across all continents except Antarctica
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size='small'>Share</Button>
+                <Button size='small'>Learn More</Button>
+              </CardActions>
+            </Card>
+          </div>
+        ))}
+      </div>
+
+      <div className='pagination'>
+        <Pagination
+          count={pages}
+          page={currentPage}
+          onChange={handleChange}
+          variant='outlined'
+          shape='rounded'
+          color='secondary'
+        />
+      </div>
     </div>
   );
 };
