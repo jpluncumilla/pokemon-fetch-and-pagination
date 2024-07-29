@@ -56,7 +56,11 @@ const PokemonList = () => {
   return (
     <div>
       <h1>MetaPhase API Fetching/Pagination Assessment</h1>
-      {loading && <CircularProgress />}
+      {loading && (
+        <div className='loading'>
+          <CircularProgress />
+        </div>
+      )}
       {!loading && (
         <div className='cards'>
           {pokemonDetails.map((e, i) => (
