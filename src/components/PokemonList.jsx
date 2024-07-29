@@ -6,6 +6,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import "./PokemonList.css";
 
 const PokemonList = () => {
   //Pass fetched pokemons to array
